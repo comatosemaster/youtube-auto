@@ -28,7 +28,7 @@ def generate_title(topic: str) -> str:
         }
     )
 
-    return response["message"]["content"].strip()
+    return response["message"]["content"].strip('"').strip("'")
 
 
 

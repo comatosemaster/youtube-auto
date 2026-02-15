@@ -5,12 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1342bac3-699c-41b6-92af-1e5b477c7007" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/yt-auto.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio_mixer.py" beforeDir="false" afterPath="$PROJECT_DIR$/audio_mixer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/final_compositor.py" beforeDir="false" afterPath="$PROJECT_DIR$/final_compositor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_12.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_13.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_14.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_15.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_16.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_17.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_18.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_19.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/img_9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/title_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/title_generator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +47,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;comatosemaster&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/comatosemaster/youtube-auto.git&quot;,
+    &quot;accountId&quot;: &quot;dea4a536-6af3-4565-9114-7dec6b53e853&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -38,15 +70,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.main.executor": "Run",
-    "Python.title_generator.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Davit/PycharmProjects/yt-auto"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.generate_multiple.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.title_generator.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Davit/PycharmProjects/yt-auto&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Davit\PycharmProjects\yt-auto" />

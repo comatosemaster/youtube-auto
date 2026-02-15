@@ -51,12 +51,12 @@ def compose_final_video(
         if not os.path.exists(p):
             raise FileNotFoundError(p)
 
-    ass_path = "styled_subtitles.ass"
+    ass_path = r"materials/styled_subtitles.ass"
 
     print("[final] Creating styled ASS subtitles...")
     create_styled_ass(subtitle_path, ass_path)
 
-    print("[final] Burning subtitles + muxing audio...")
+    print("[final] Burning subtitles + mixing audio...")
     cmd = [
         FFMPEG,
         "-y",

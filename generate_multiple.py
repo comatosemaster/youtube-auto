@@ -1,7 +1,5 @@
-import sys
 import os
-import re
-import time
+import random
 
 from title_generator import generate_title
 from text_generator import generate_text
@@ -11,17 +9,15 @@ from video_generator import generate_silent_video
 from audio_mixer import mix_audio
 from final_compositor import compose_final_video
 from search_keyword_generator import generate_search_keyword
-from upload_video import upload_video
-from clean_up_junk import clear_folder
 
-def sanitize_filename(name: str) -> str:
-    name = re.sub(r'[\\/*?:"<>|]', "", name)
-    name = name.lower()
-    name = name.replace(" ", "_")
+topics = ["Phsychology", "Space", "What if...", "Nature", "Meditation"]
+topic = random.choice(topics)
+duration_seconds = 300
 
-    return name
+gen_num = 5
+current_video = 1
 
-def main(topic: str, duration_seconds: int):
+while current_video+1 != gen_num:
     print("=== PIPELINE START ===")
 
     # ---------- 1. TITLE ----------
@@ -37,38 +33,38 @@ def main(topic: str, duration_seconds: int):
     print("[2] Generating script...")
     script_text = generate_text(title, duration_seconds)
 
-    with open(r"materials/script.txt", "w", encoding="utf-8") as f:
+    with open("script.txt", "w", encoding="utf-8") as f:
         f.write(script_text)
 
     # ---------- 3. TEXT → SPEECH ----------
     print("[3] Generating narration.wav...")
-    text_to_wav(script_text, r"materials/narration.wav")
+    text_to_wav(script_text, "narration.wav")
 
-    if not os.path.exists(r"materials/narration.wav"):
+    if not os.path.exists("narration.wav"):
         raise RuntimeError("narration.wav was not created")
 
     # ---------- 4. SUBTITLES ----------
     print("[4] Generating narration.srt...")
     generate_subtitles(
-        audio_path=r"materials/narration.wav",
-        output_srt=r"materials/narration.srt"
+        audio_path="narration.wav",
+        output_srt="narration.srt"
     )
 
     print("[5] Generating silent video.mp4...")
     generate_silent_video(
-        audio_path=r"materials/narration.wav",
+        audio_path="narration.wav",
         image_count=20,
         keyword=search_keyword,
-        output_path=r"materials/out.mp4"
+        output_path="out.mp4"
     )
 
-    if not os.path.exists(r"materials/out.mp4"):
+    if not os.path.exists("out.mp4"):
         raise RuntimeError("out.mp4 was not created")
 
     # ---------- 5. AUDIO MIX (VOICE + MUSIC) ----------
     print("[6] Mixing narration + background music...")
     mixed_audio_path = mix_audio(
-        narration_wav=r"materials/narration.wav",
+        narration_wav="narration.wav",
         music_dir="music"
     )
 
@@ -78,38 +74,13 @@ def main(topic: str, duration_seconds: int):
     # ---------- 6. FINAL COMPOSITION ----------
     print("[7] Compositing final video with subtitles...")
     final_video_path = compose_final_video(
-        video_path=r"materials/out.mp4",
+        video_path="out.mp4",
         audio_path=mixed_audio_path,
-        subtitle_path=r"materials/narration.srt",
-        output_path=fr"output/{sanitize_filename(title)}.mp4"
+        subtitle_path="narration.srt",
+        output_path=f"final_video_{current_video}.mp4"
     )
 
-    # print("[8] Uploading video on YouTube...")
-    # path_to_video = r"output/final_video.mp4"
-    # description = "Test pipeline"
-    # tags = ["science", "space", "psychology"]
-    # upload_video(path_to_video, title, description, tags)
-
     print("=== PIPELINE DONE ===")
-    print(f"Final result: {final_video_path}\n")
+    print(f"Final result: {final_video_path}")
 
-    time.sleep(5)
-
-    print("Cleaning up junk...")
-    to_be_cleaned = ["materials", "images"]
-    for folder in to_be_cleaned:
-        clear_folder(folder)
-        print(f"'{folder}' is cleaned up")
-    print("Clean up is finished.")
-
-
-# ---------- CLI ----------
-if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: python main.py \"topic\" duration_seconds")
-        sys.exit(1)
-
-    topic = sys.argv[1]
-    duration = int(sys.argv[2])
-
-    main(topic, duration)
+    current_video += 1
