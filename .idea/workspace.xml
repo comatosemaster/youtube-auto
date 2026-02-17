@@ -5,84 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1342bac3-699c-41b6-92af-1e5b477c7007" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/generators/gpt_search_keyword_generator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/generators/gpt_text_generator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/generators/gpt_title_generator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/generators/thumbnail_generator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/generators/video_generator_video.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/generators/yt_description_generator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/fonts/Montserrat Extra Bold.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/temp/description.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/temp/mixed_audio.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/temp/narration.srt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/temp/narration.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/temp/out.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/temp/script.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/temp/styled_subtitles.ass" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_0.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_1.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_10.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_11.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_12.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_13.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_14.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_15.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_16.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_17.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_18.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_19.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_2.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_20.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_21.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_22.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_23.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_24.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_25.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_26.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_27.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_28.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_29.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_3.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_30.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_31.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_32.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_33.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_34.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_35.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_36.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_37.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_38.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_39.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_4.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_5.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_6.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_7.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_8.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/materials/videos/vid_9.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/other/pexels_video_downloader.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/unlocking_the_future_of_artificial_intelligence_today.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio_mixer.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/audio_mixer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clean_up_junk.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/clean_up_junk.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/final_compositor.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/final_compositor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generate_multiple.py" beforeDir="false" afterPath="$PROJECT_DIR$/other/generate_multiple.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/generators/gpt_description_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/generators/gpt_description_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/generators/gpt_text_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/generators/gpt_text_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/generators/search_keyword_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/other/search_keyword_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/generators/text_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/other/text_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/generators/thumbnail_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/generators/thumbnail_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/generators/title_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/other/title_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/generators/video_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/other/video_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/generators/video_generator_backup.py" beforeDir="false" afterPath="$PROJECT_DIR$/other/video_generator_backup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/generators/yt_description_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/other/yt_description_generator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music/cinematic-362462.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/materials/music/cinematic-362462.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music/epic-cinematic-trailer-113981.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/materials/music/epic-cinematic-trailer-113981.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music/inspiring-cinematic-music-409347.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/materials/music/inspiring-cinematic-music-409347.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music/lost-in-dreams-abstract-chill-downtempo-cinematic-future-beats-270241.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/materials/music/lost-in-dreams-abstract-chill-downtempo-cinematic-future-beats-270241.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music/risk-136788.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/materials/music/risk-136788.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/uncovering_the_dark_side_of_human_nature.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search_keyword_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/generators/search_keyword_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subtitle_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/generators/subtitle_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/text_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/generators/text_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/text_to_speech.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/text_to_speech.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/title_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/generators/title_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/upload_video.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/upload_video.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/generators/video_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video_generator_backup.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/generators/video_generator_backup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/voice_plus_video.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/voice_plus_video.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,6 +59,7 @@
   "keyToString": {
     "Python.generate_multiple.executor": "Run",
     "Python.main.executor": "Run",
+    "Python.thumbnail_generator.executor": "Run",
     "Python.thumbnail_test.executor": "Run",
     "Python.title_generator.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -138,11 +72,11 @@
       <recent name="C:\Users\Davit\PycharmProjects\yt-auto" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Davit\PycharmProjects\yt-auto\other" />
       <recent name="C:\Users\Davit\PycharmProjects\yt-auto" />
       <recent name="C:\Users\Davit\PycharmProjects\yt-auto\materials\temp" />
       <recent name="C:\Users\Davit\PycharmProjects\yt-auto\app" />
       <recent name="C:\Users\Davit\PycharmProjects\yt-auto\materials" />
-      <recent name="C:\Users\Davit\PycharmProjects\yt-auto\materials\secrets" />
     </key>
   </component>
   <component name="SharedIndexes">

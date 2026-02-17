@@ -1,26 +1,23 @@
 import os
 import re
 import time
-from pathlib import Path
 import sys
 import random
 
-from app.generators.title_generator import generate_title
-from app.generators.text_generator import generate_text
 from app.utils.text_to_speech import text_to_wav
 from app.generators.subtitle_generator import generate_subtitles
 from app.utils.audio_mixer import mix_audio
 from app.utils.final_compositor import compose_final_video
 from app.utils.upload_video import upload_video
 from app.utils.clean_up_junk import clear_folder
-from app.generators.yt_description_generator import generate_description
 from app.generators.video_generator_video import generate_silent_video
 from app.generators.thumbnail_generator import generate_thumbnail
+from app.generators.gpt_text_generator import generate_text
+from app.generators.gpt_title_generator import generate_title
+from app.generators.gpt_description_generator import generate_description
 
 DOMAINS = [
-    "space",
-    "psychology",
-    "technology"
+    "space"
 ]
 
 def sanitize_filename(name: str) -> str:
@@ -32,6 +29,7 @@ def sanitize_filename(name: str) -> str:
 
 def main(duration_seconds: int):
     print("=== PIPELINE START ===")
+    pipeline_start = time.time()
 
     # ---------- 1.1 SCRIPT ----------
     print("[1] Selecting the domain/topic...")
@@ -103,8 +101,12 @@ def main(duration_seconds: int):
 
     # Thumbnail generation
 
-    print("[8] Generating thumbnail automatically...")
-    thumbnail_path = generate_thumbnail(title)
+    print("[8] Generating thumbnail...")
+    try:
+        thumbnail_path = generate_thumbnail(title)
+    except Exception as e:
+        print("Thumbnail generation failed:", e)
+        thumbnail_path = None
 
     print("[9] Uploading video on YouTube...")
     path_to_video = fr"output/{safe_filename}.mp4"
@@ -119,14 +121,20 @@ def main(duration_seconds: int):
     print("=== PIPELINE DONE ===")
     print(f"Final result: {final_video_path}\n")
 
-    time.sleep(5)
+    # print("Cleaning up junk...")
+    # to_be_cleaned = ["materials/temp", "materials/videos"]
+    # for folder in to_be_cleaned:
+    #     clear_folder(folder)
+    #     print(f"'{folder}' is cleaned up")
+    # print("Clean up is finished.")
 
-    print("Cleaning up junk...")
-    to_be_cleaned = ["materials/temp", "materials/videos"]
-    for folder in to_be_cleaned:
-        clear_folder(folder)
-        print(f"'{folder}' is cleaned up")
-    print("Clean up is finished.")
+    pipeline_end = time.time()
+    total_seconds = int(pipeline_end - pipeline_start)
+
+    minutes = total_seconds // 60
+    seconds = total_seconds % 60
+
+    print(f"Total pipeline time: {minutes}m {seconds}s")
 
 
 # ---------- CLI ----------
@@ -137,4 +145,5 @@ if __name__ == "__main__":
 
     duration = int(sys.argv[1])
     main(duration)
+
 

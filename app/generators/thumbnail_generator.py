@@ -1,10 +1,15 @@
 import os
+import base64
 import requests
 from io import BytesIO
 from PIL import Image, ImageOps
 from dotenv import load_dotenv
 from openai import OpenAI
 
+
+# -----------------------------------------
+# Setup
+# -----------------------------------------
 
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -38,10 +43,16 @@ Title: {title}
 
     response = client.chat.completions.create(
         model="gpt-5-mini",
-        messages=[{"role": "user", "content": prompt}]
+        messages=[{"role": "user", "content": prompt}],
+        max_completion_tokens=20
     )
 
-    return response.choices[0].message.content.strip().upper()
+    hook = response.choices[0].message.content.strip().upper()
+
+    # Safety cleanup
+    hook = hook.replace('"', "").replace("'", "").strip()
+
+    return hook
 
 
 # -----------------------------------------
@@ -55,54 +66,37 @@ def generate_thumbnail(title):
     hook = generate_hook(title)
 
     prompt = f"""
-Create a highly clickable YouTube thumbnail.
+    Create a highly clickable YouTube thumbnail.
 
-The hook text MUST be exactly:
+    The hook text MUST be exactly:
 
-{hook}
+    {hook}
 
-Do not modify the text.
+    Do not use any other text.
+    Do not include the original video title.
+    Do not expand the hook.
 
-General Requirements:
+    Visual theme:
+    {title}
 
-• High CTR composition
-• Strong focal point
-• Clean background
-• No clutter
-• Cinematic quality
-• Professional color grading
-• High contrast
-• Sharp subject
-• No AI artifacts
-• No watermark
-• No distorted elements
-• 16:9 layout
+    Requirements:
+    - Strong focal point
+    - Clean background
+    - High contrast
+    - Cinematic quality
+    - No clutter
+    - No watermark
+    - No AI artifacts
+    - 16:9 layout
 
-Visual style should match the theme of:
-
-{title}
-
-If topic is:
-- Space → cosmic scale, dramatic astronomy visuals
-- Technology → modern tech visuals, sleek, sharp
-- Psychology → conceptual or subtle human presence
-- Abstract topic → symbolic visual metaphor
-
-Do NOT force a human subject.
-Use human only if contextually appropriate.
-
-Text styling:
-
-• First line YELLOW
-• Second line WHITE
-• Third line YELLOW if exists
-• Very large bold modern YouTube font
-• Thick black outline
-• Clean readable layout
-• Left or right placement depending on composition
-
-Text must be readable at small mobile size.
-"""
+    Text styling:
+    - First line YELLOW
+    - Second line WHITE
+    - Third line YELLOW if exists
+    - Very large bold font
+    - Thick black outline
+    - Readable on mobile
+    """
 
     result = client.images.generate(
         model="gpt-image-1",
@@ -111,10 +105,26 @@ Text must be readable at small mobile size.
         quality="medium"
     )
 
-    image_url = result.data[0].url
-    image_bytes = requests.get(image_url).content
+    if not result.data:
+        raise RuntimeError("Image generation returned empty data.")
+
+    image_data = result.data[0]
+
+    # Handle base64 response (modern default)
+    if getattr(image_data, "b64_json", None):
+        image_bytes = base64.b64decode(image_data.b64_json)
+
+    # Handle URL response (fallback)
+    elif getattr(image_data, "url", None):
+        response = requests.get(image_data.url)
+        image_bytes = response.content
+
+    else:
+        raise RuntimeError("Image generation failed: no image data returned.")
+
     img = Image.open(BytesIO(image_bytes))
 
+    # Crop properly to YouTube size without distortion
     img = ImageOps.fit(
         img,
         (1280, 720),
@@ -123,5 +133,7 @@ Text must be readable at small mobile size.
     )
 
     img.save(OUTPUT_PATH)
+
+    print(f"Thumbnail saved at: {OUTPUT_PATH}")
 
     return OUTPUT_PATH

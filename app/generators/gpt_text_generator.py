@@ -9,32 +9,34 @@ MODEL = "gpt-5-mini"
 WORDS_PER_MINUTE = 150
 
 SYSTEM_PROMPT = """
-You are writing a spoken YouTube narration.
+You are writing a spoken YouTube narration for a science and technology channel.
 
 YES:
-- YES strong psychological hook in the first 2–3 sentences
-- YES introduce tension early
-- YES escalate the idea gradually
-- YES alternate short punchy sentences with longer reflective ones
-- YES use vivid but simple imagery when possible
-- YES maintain emotional undercurrent
-- YES sound human and slightly dramatic but controlled
-- YES vary sentence rhythm
-- YES leave tension unresolved at the end
+- YES start with a clear conceptual hook (not emotional drama).
+- YES define the core mechanism or problem early.
+- YES explain how the system works step by step.
+- YES use precise but accessible language.
+- YES introduce cause-and-effect reasoning.
+- YES use technical terminology when appropriate (but explain it clearly).
+- YES include mechanisms, processes, constraints, trade-offs.
+- YES build logical progression.
+- YES maintain intellectual tension through complexity, not drama.
+- YES end with an open scientific question or unresolved technical limitation.
 
 NO:
-- NO greetings
-- NO mentioning audience or channel
-- NO summaries or conclusions
-- NO phrases like "throughout history" or "since the dawn of time"
-- NO academic tone
-- NO statistics, dates, named individuals
-- NO filler phrases
-- NO repeating the topic wording
-- NO safe neutral tone
-- NO obvious AI phrasing
+- NO storytelling format.
+- NO fictional scenarios.
+- NO personal perspective.
+- NO emotional manipulation.
+- NO cinematic imagery.
+- NO vague phrases like "something changed".
+- NO filler sentences.
+- NO dramatic cliffhanger language.
+- NO audience addressing.
+- NO greetings.
+- NO summaries like "in conclusion".
 
-Write as one continuous narration.
+Write as one continuous scientific narration.
 No emojis. No markdown. No headings.
 """.strip()
 
@@ -47,21 +49,21 @@ def generate_text(title: str, seconds: int) -> str:
     words = target_word_count(seconds)
 
     user_prompt = f"""
-Topic: {title}
+    Topic: {title}
 
-Duration target: {seconds} seconds.
-Approximate word count: {words}.
+    Target duration: {seconds} seconds.
+    The narration should be close to {words} words (±10%).
+    Do not significantly underwrite or overwrite the target length.
 
-Structure:
-1. Hook (first 10–15 seconds must create psychological tension)
-2. Expansion of idea
-3. Deeper unsettling turn
-4. Open unresolved ending
+    Structure:
+    1. Technical hook introducing the core scientific or technological issue.
+    2. Explanation of the underlying mechanism or system.
+    3. Analysis of constraints, weaknesses, or edge cases.
+    4. Forward-looking unresolved scientific or engineering challenge.
 
-Do not explain the topic academically.
-Do not resolve the idea.
-Keep it immersive.
-""".strip()
+    Focus on clarity, reasoning, and mechanism.
+    Avoid storytelling.
+    """.strip()
 
     api_key = os.getenv("OPENAI_API_KEY")
 
@@ -75,7 +77,7 @@ Keep it immersive.
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": user_prompt}
-        ]
+        ],
     )
 
     return response.choices[0].message.content.strip()
