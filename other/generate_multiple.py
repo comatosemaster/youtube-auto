@@ -1,14 +1,14 @@
 import os
 import random
 
-from title_generator import generate_title
-from text_generator import generate_text
-from text_to_speech import text_to_wav
-from subtitle_generator import generate_subtitles
-from video_generator import generate_silent_video
-from audio_mixer import mix_audio
-from final_compositor import compose_final_video
-from search_keyword_generator import generate_search_keyword
+from app.generators.title_generator import generate_title
+from app.generators.text_generator import generate_text
+from app.utils.text_to_speech import text_to_wav
+from app.generators.subtitle_generator import generate_subtitles
+from app.generators.video_generator import generate_silent_video
+from app.utils.audio_mixer import mix_audio
+from app.utils.final_compositor import compose_final_video
+from app.generators.search_keyword_generator import generate_search_keyword
 
 topics = ["Phsychology", "Space", "What if...", "Nature", "Meditation"]
 topic = random.choice(topics)
@@ -65,7 +65,7 @@ while current_video+1 != gen_num:
     print("[6] Mixing narration + background music...")
     mixed_audio_path = mix_audio(
         narration_wav="narration.wav",
-        music_dir="music"
+        music_dir="../materials/music"
     )
 
     if not os.path.exists(mixed_audio_path):

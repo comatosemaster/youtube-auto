@@ -17,7 +17,7 @@ def pick_random_music(music_dir: str) -> str:
 def mix_audio(
     narration_wav: str,
     music_dir: str = "music",
-    output_wav: str = r"materials/mixed_audio.wav",
+    output_wav: str = r"materials/temp/mixed_audio.wav",
     music_volume: float = 0.04,
     fade_in: float = 2.0,
     fade_out: float = 3.0

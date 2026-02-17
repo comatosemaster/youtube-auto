@@ -3,7 +3,7 @@ import whisper
 
 def generate_subtitles(
     audio_path: str,
-    output_srt: str = "narration.srt",
+    output_srt: str = r"materials/temp/narration.srt",
     model_size: str = "small"
 ) -> str:
     if not os.path.exists(audio_path):

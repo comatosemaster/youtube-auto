@@ -1,18 +1,27 @@
-import sys
 import os
 import re
 import time
+from pathlib import Path
+import sys
+import random
 
-from title_generator import generate_title
-from text_generator import generate_text
-from text_to_speech import text_to_wav
-from subtitle_generator import generate_subtitles
-from video_generator import generate_silent_video
-from audio_mixer import mix_audio
-from final_compositor import compose_final_video
-from search_keyword_generator import generate_search_keyword
-from upload_video import upload_video
-from clean_up_junk import clear_folder
+from app.generators.title_generator import generate_title
+from app.generators.text_generator import generate_text
+from app.utils.text_to_speech import text_to_wav
+from app.generators.subtitle_generator import generate_subtitles
+from app.utils.audio_mixer import mix_audio
+from app.utils.final_compositor import compose_final_video
+from app.utils.upload_video import upload_video
+from app.utils.clean_up_junk import clear_folder
+from app.generators.yt_description_generator import generate_description
+from app.generators.video_generator_video import generate_silent_video
+from app.generators.thumbnail_generator import generate_thumbnail
+
+DOMAINS = [
+    "space",
+    "psychology",
+    "technology"
+]
 
 def sanitize_filename(name: str) -> str:
     name = re.sub(r'[\\/*?:"<>|]', "", name)
@@ -21,55 +30,63 @@ def sanitize_filename(name: str) -> str:
 
     return name
 
-def main(topic: str, duration_seconds: int):
+def main(duration_seconds: int):
     print("=== PIPELINE START ===")
 
+    # ---------- 1.1 SCRIPT ----------
+    print("[1] Selecting the domain/topic...")
+    topic = random.choice(DOMAINS)
+    print(f"Chosen domain: {topic}")
+
     # ---------- 1. TITLE ----------
-    print("[1] Generating title...")
+    print("[1.1] Generating title...")
     title = generate_title(topic)
     print(f"Title: {title}")
-
-    print("[1.1] Generating search keyword...")
-    search_keyword = generate_search_keyword(title)
-    print(f"Search keyword: {search_keyword}")
+    safe_filename = sanitize_filename(title)
 
     # ---------- 2. SCRIPT ----------
     print("[2] Generating script...")
     script_text = generate_text(title, duration_seconds)
 
-    with open(r"materials/script.txt", "w", encoding="utf-8") as f:
+    with open(r"materials/temp/script.txt", "w", encoding="utf-8") as f:
         f.write(script_text)
+
+    print("[2.1] Generating YouTube video description...")
+    generated_description = generate_description(title, script_text)
+
+    with open(r"materials/temp/description.txt", "w", encoding="utf-8") as f:
+        f.write(generated_description)
 
     # ---------- 3. TEXT → SPEECH ----------
     print("[3] Generating narration.wav...")
-    text_to_wav(script_text, r"materials/narration.wav")
+    text_to_wav(script_text, r"materials/temp/narration.wav")
 
-    if not os.path.exists(r"materials/narration.wav"):
+    if not os.path.exists(r"materials/temp/narration.wav"):
         raise RuntimeError("narration.wav was not created")
 
     # ---------- 4. SUBTITLES ----------
     print("[4] Generating narration.srt...")
     generate_subtitles(
-        audio_path=r"materials/narration.wav",
-        output_srt=r"materials/narration.srt"
+        audio_path=r"materials/temp/narration.wav",
+        output_srt=r"materials/temp/narration.srt"
     )
 
     print("[5] Generating silent video.mp4...")
     generate_silent_video(
-        audio_path=r"materials/narration.wav",
-        image_count=20,
-        keyword=search_keyword,
-        output_path=r"materials/out.mp4"
+        audio_path=r"materials/temp/narration.wav",
+        image_count=40,
+        keyword=topic,
+        output_path=r"materials/temp/out.mp4"
     )
 
-    if not os.path.exists(r"materials/out.mp4"):
+    if not os.path.exists(r"materials/temp/out.mp4"):
         raise RuntimeError("out.mp4 was not created")
 
     # ---------- 5. AUDIO MIX (VOICE + MUSIC) ----------
     print("[6] Mixing narration + background music...")
     mixed_audio_path = mix_audio(
-        narration_wav=r"materials/narration.wav",
-        music_dir="music"
+        narration_wav=r"materials/temp/narration.wav",
+        music_dir="materials/music"
     )
 
     if not os.path.exists(mixed_audio_path):
@@ -78,17 +95,26 @@ def main(topic: str, duration_seconds: int):
     # ---------- 6. FINAL COMPOSITION ----------
     print("[7] Compositing final video with subtitles...")
     final_video_path = compose_final_video(
-        video_path=r"materials/out.mp4",
+        video_path=r"materials/temp/out.mp4",
         audio_path=mixed_audio_path,
-        subtitle_path=r"materials/narration.srt",
-        output_path=fr"output/{sanitize_filename(title)}.mp4"
+        subtitle_path=r"materials/temp/narration.srt",
+        output_path=fr"output/{safe_filename}.mp4"
     )
 
-    # print("[8] Uploading video on YouTube...")
-    # path_to_video = r"output/final_video.mp4"
-    # description = "Test pipeline"
-    # tags = ["science", "space", "psychology"]
-    # upload_video(path_to_video, title, description, tags)
+    # Thumbnail generation
+
+    print("[8] Generating thumbnail automatically...")
+    thumbnail_path = generate_thumbnail(title)
+
+    print("[9] Uploading video on YouTube...")
+    path_to_video = fr"output/{safe_filename}.mp4"
+
+    upload_video(
+        file_path=path_to_video,
+        title=title,
+        description=generated_description,
+        thumbnail_path=str(thumbnail_path)
+    )
 
     print("=== PIPELINE DONE ===")
     print(f"Final result: {final_video_path}\n")
@@ -96,7 +122,7 @@ def main(topic: str, duration_seconds: int):
     time.sleep(5)
 
     print("Cleaning up junk...")
-    to_be_cleaned = ["materials", "images"]
+    to_be_cleaned = ["materials/temp", "materials/videos"]
     for folder in to_be_cleaned:
         clear_folder(folder)
         print(f"'{folder}' is cleaned up")
@@ -105,11 +131,10 @@ def main(topic: str, duration_seconds: int):
 
 # ---------- CLI ----------
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: python main.py \"topic\" duration_seconds")
+    if len(sys.argv) < 2:
+        print("Usage: python main.py duration_seconds")
         sys.exit(1)
 
-    topic = sys.argv[1]
-    duration = int(sys.argv[2])
+    duration = int(sys.argv[1])
+    main(duration)
 
-    main(topic, duration)

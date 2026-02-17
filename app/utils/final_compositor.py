@@ -1,6 +1,5 @@
 import os
 import subprocess
-import pysubs2
 
 FFMPEG = "ffmpeg"  # relies on ffmpeg in PATH (works on your machine)
 
@@ -51,7 +50,7 @@ def compose_final_video(
         if not os.path.exists(p):
             raise FileNotFoundError(p)
 
-    ass_path = r"materials/styled_subtitles.ass"
+    ass_path = r"materials/temp/styled_subtitles.ass"
 
     print("[final] Creating styled ASS subtitles...")
     create_styled_ass(subtitle_path, ass_path)

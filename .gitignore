@@ -1,2 +1,3 @@
-client_secrets.json
-token.pickle
+materials/secrets/client_secrets.json
+materials/secrets/token.pickle
+.env

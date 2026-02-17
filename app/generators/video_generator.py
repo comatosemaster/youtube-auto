@@ -91,7 +91,7 @@ def generate_silent_video(
     image_count: int,
     keyword: str,
     output_path: str,
-    image_dir: str = "images"
+    image_dir: str = r"materials/images"
 ) -> str:
 
     """

@@ -4,6 +4,14 @@ import google.auth.transport.requests
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
+from pathlib import Path
+from googleapiclient.errors import HttpError
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+SECRETS_DIR = BASE_DIR / "materials" / "secrets"
+
+CLIENT_SECRETS_FILE = SECRETS_DIR / "client_secrets.json"
+TOKEN_FILE = SECRETS_DIR / "token.pickle"
 
 # If modifying scopes, delete token.pickle.
 SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
@@ -11,8 +19,8 @@ SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
 def authenticate():
     credentials = None
 
-    if os.path.exists("token.pickle"):
-        with open("token.pickle", "rb") as token:
+    if TOKEN_FILE.exists():
+        with open(TOKEN_FILE, "rb") as token:
             credentials = pickle.load(token)
 
     if not credentials or not credentials.valid:
@@ -20,28 +28,27 @@ def authenticate():
             credentials.refresh(google.auth.transport.requests.Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                "client_secrets.json", SCOPES
+                str(CLIENT_SECRETS_FILE), SCOPES
             )
             credentials = flow.run_local_server(port=0)
 
-        with open("token.pickle", "wb") as token:
+        with open(TOKEN_FILE, "wb") as token:
             pickle.dump(credentials, token)
 
     return build("youtube", "v3", credentials=credentials)
 
 
-def upload_video(file_path, title, description, tags):
+def upload_video(file_path, title, description, thumbnail_path=None):
     youtube = authenticate()
 
     request_body = {
         "snippet": {
             "title": title,
             "description": description,
-            "tags": tags,
-            "categoryId": "22"  # People & Blogs
+            "categoryId": "22"
         },
         "status": {
-            "privacyStatus": "private"  # change to public when ready
+            "privacyStatus": "public"
         }
     }
 
@@ -59,9 +66,22 @@ def upload_video(file_path, title, description, tags):
         if status:
             print(f"Uploading... {int(status.progress() * 100)}%")
 
+    video_id = response["id"]
+
     print("Upload complete!")
-    print("Video ID:", response["id"])
-    print(f"YouTube URL: https://youtube.com/v={response['id']}")
+    print("Video ID:", video_id)
+    print(f"YouTube URL: https://youtube.com/watch?v={video_id}")
+
+    # ---------- THUMBNAIL UPLOAD ----------
+    if thumbnail_path and os.path.exists(thumbnail_path):
+        try:
+            youtube.thumbnails().set(
+                videoId=video_id,
+                media_body=MediaFileUpload(thumbnail_path)
+            ).execute()
+            print("Thumbnail uploaded successfully.")
+        except HttpError as e:
+            print("Thumbnail upload failed:", e)
 
 
 if __name__ == "__main__":
@@ -69,5 +89,4 @@ if __name__ == "__main__":
         file_path="video.mp4",
         title="Automated Upload Test",
         description="Uploaded via Python automation.",
-        tags=["automation", "python", "youtube"]
     )
